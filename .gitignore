@@ -1,0 +1,6 @@
+#ignore all build directories and files contained within
+**/build/
+#ignore all cmake files
+**/*.cmake
+**/CMakeLists.txt
+**/.vscode
