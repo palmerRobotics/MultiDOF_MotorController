@@ -1,0 +1,5 @@
+The code contained in this directory is designed to test the functionality
+of my custorm DRV8876 breakout board. This code is written to run on the 
+Raspberry Pi Pico. This goal of this project is to learn how to write a brushed
+DC motor driver using the DRV8876, which will later be used with the 
+PIC32MK.
