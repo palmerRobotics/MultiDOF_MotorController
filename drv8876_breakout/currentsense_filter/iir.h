@@ -6,7 +6,7 @@
 typedef volatile struct iirfilter { //not sure if stuct should be defined as volatile... it made a warning go away though
     char order;
     float b[MAX_ORDER+1];
-    float a[MAX_ORDER+1]; //what if I just completely ignore a[0]. as in leave it out entirely. since the coefficients are already normalized.
+    float a[MAX_ORDER+1];
     float x[MAX_ORDER+1];
     float y[MAX_ORDER];
 } IIRfilter;

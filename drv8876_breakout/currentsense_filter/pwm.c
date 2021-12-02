@@ -24,21 +24,16 @@ bool repeating_timer_callback(struct repeating_timer *timer) {
     //adc read will never exceed 2^12 = 4096. Can't lose data converting from uint to int
     int dir_val = raw_val;
     
-    //If the direction is reverse, negate current reading (since it's always positive, regardless of direction)
+    //If the rotation direction is reverse, negate current reading (since it's always positive, regardless of direction)
     if ( gpio_get(ph) == 0) {
         dir_val = raw_val * -1;
     }
     
-    //printf("dir: %d\n", dir_val);
-    //TODO: should probably base control loop and filter off of adc value rather than V. less computation. Will need to change parameter type of filterSignal
-    //float filtered_val = filterSignal(&LPbutter, dir_val);
-    //printf("filt: %f\n", filtered_val);
+    //TODO: should probably base control loop and filter off of adc value rather than V. Less computation. Will need to change parameter type of filterSignal()
     float dir_V = dir_val * conversion_factor;
-    //float filtered_V = filtered_val * conversion_factor;
 
     float filtered_V = filterSignal(&LPbutter, dir_V);
     
-    //printf("Dir value: %d, voltage: %f V\n", dir_val, dir_val * conversion_factor);
     printf("%f|%f\n", dir_V, filtered_V);
     return true;
 }
@@ -84,29 +79,30 @@ int main() {
     gpio_put(nsleep,1);
 
     //imode and vref are tied to ground and 3.3V, respectively. No need to set them in software
+
+    // IIR filter order and a & b coefficents determined via MATLAB
     const char order = 2;
-    float b[MAX_ORDER] = {0.0279, 0.0557, 0.0279}; //I expect issues here
+    float b[MAX_ORDER] = {0.0279, 0.0557, 0.0279};
     float a[MAX_ORDER] = {1.0, -1.4755, 0.5869};
 
+    // Initialize filter order and coefficients
     initFilter(&LPbutter, order, b, a);
-    /*
-    printf("Out of initFilter.\nLPbutter.order: %d\n", LPbutter.order);
-    for (int i = 0; i < MAX_ORDER; i++) { //change max_order to filter->order
-        printf("%f | %f | %f | %f\n", LPbutter.b[i], LPbutter.a[i], LPbutter.x[i], LPbutter.y[i]);
-    }
-    */
 
     // Set the PWM running
     pwm_set_enabled(slice_num, true);
 
-    struct repeating_timer current_sensing_timer;
     printf("Raw V | Filtered V\n");
-    //.5 sec period for printing. Will need to change to 5kHz for actual filtering
+
+    // Set up timer-based interrupt for measuring current
+    struct repeating_timer current_sensing_timer;
+    //.01 sec period (100Hz) for measuring motor current. Will need to change to 5kHz for deployment
     add_repeating_timer_ms(10, repeating_timer_callback, NULL, &current_sensing_timer);
 
+    // Set forward motor rotation direction
     gpio_put(ph,1);
     pwm_set_chan_level(slice_num, PWM_CHAN_A, rollover);
 
+    // Uncomment contents of while loop to toggle motor rotation direction every 5 secs
     while(1) {
         /*
         gpio_put(ph,1);

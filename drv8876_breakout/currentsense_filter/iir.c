@@ -36,7 +36,6 @@ float filterSignal (IIRfilter* filter, float signal) {
    return output;
 }
 
-// these two functions could be one, if the i/o vector is passed in. or maybe a flag. having both is repetitive
 void update_previous_io(IIRfilter* filter, float new_output, float new_input) {
     //printf("before updating io, x=%f, y=%f: (x | y)\n", new_input, new_output);
     //printf("new io, x=%f, y=%f: (x | y)\n", new_input, new_output);
@@ -51,7 +50,7 @@ void update_previous_io(IIRfilter* filter, float new_output, float new_input) {
         
     }
     filter->x[0] = new_input;
-    //y[0] should never be updated not accessed, since the neweest output is always dependent on previous outputs
+    //y[0] should never be updated nor accessed, since the newest output is always dependent on previous outputs
     filter->y[1] = new_output;
     //printf("after updating io: (x | y)\n");
     /*
