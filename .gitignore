@@ -1,6 +1,14 @@
-#ignore all build directories and files contained within
+#ignore all RPI Pico build directories and files contained within
 **/build/
-#ignore all cmake files
+#ignore all RPI Pico cmake files
 **/*.cmake
 **/CMakeLists.txt
+#ignore all VS Code metadata
 **/.vscode
+#ignore all MATLAB autosave files
+**/*.asv
+#ignore all EAGLE build files
+**/CAMoutputs*
+**/DRV8876_Breakout.b#*
+**/DRV8876_Breakout.s#*
+**/eagle.epf
