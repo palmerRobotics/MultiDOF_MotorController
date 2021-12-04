@@ -1,0 +1,1 @@
+This arduino script was used to quickly and easily verify that the DRV8876 breakout board pcb was functional. Minimal driver code was written to verify that a brushed DC motor could be controlled through using PWM and a direction pin. Once the driver and pcb were verified to work correctly, additional development was performed on a Raspberry Pi Pico. 

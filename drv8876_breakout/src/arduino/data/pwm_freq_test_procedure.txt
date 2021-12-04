@@ -1,0 +1,9 @@
+Test Procedure:
+
+Ramp up 0->100% Duty Cycle over 5 sec
+Ramp down 100->0% Duty Cycle over 5 sec
+
+25% duty cycle, changing direction every 3 sec for 12 sec
+50% duty cycle, changing direction every 3 sec for 12 sec
+75% duty cycle, changing direction every 3 sec for 12 sec
+100% duty cycle, changing direction every 3 sec for 12 sec

@@ -1,0 +1,7 @@
+Initial testing of the DRV8876's current sensing capability showed that
+the internal sensor is very noisy (duh). This prompted the use of a low pass
+filter to remove the noise from the signal. A digital IIR filter was chosen
+as the filter design. I considered implenting the filter in hardware, but
+decided the flexibility of a digital filter was preferrable.The implementation
+of the IIR is found in iir.h & iir.c. The motor driver (with filtered current
+sensing) is found in pwm.c.

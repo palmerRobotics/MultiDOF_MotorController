@@ -1,0 +1,5 @@
+The goal of this project is to enable pwm control of a brushed DC motor using
+the DRV8876 motor driver and Raspberry Pi Pico microcontroller. OUpon
+successful pwm motor control implementation, the project evolved to test the
+effect of pwm frequency on the behavior/performance of the motor. The
+different pwm frequencies tested are 20kHz, 30kHz, and 40kHz.

@@ -1,0 +1,18 @@
+//In this test, the arduino is commanding a 75% and 50% duty cycle in opposite directions, for 5 seconds each. This simple test takes 500 samples of the current sensing voltage at the adc. The samples are then averaged. The direction change transient is part of the samples. Note how the fwd and rvrs average adc readings are fairly close. This implies that low pass filtering would indeed improve instanteous current sense readings. 
+//! Can try finding the variance and std deviation of the data set. Not sure how helpful it would be. 
+
+Rvrs avg: 181.72
+Fwd avg: 218.31
+Rvrs avg: 183.41
+Fwd avg: 219.40
+Rvrs avg: 181.28
+Fwd avg: 216.19
+Rvrs avg: 185.61
+Fwd avg: 214.95
+Rvrs avg: 181.38
+Fwd avg: 215.60
+Rvrs avg: 181.33
+Fwd avg: 214.01
+Rvrs avg: 183.80
+
+
